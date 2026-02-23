@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #fff8f0;
+        }
+
+        /* Header */
+        .header {
+            background-color: #ff8800;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .title {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .title span {
+            font-size: 14px;
+            font-weight: normal;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 500px;
+            margin: 30px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+
+        h3 {
+            text-align: center;
+            color: #ff8800;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 12px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        input:focus {
+            border-color: #ff8800;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #ff8800;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e67300;
+        }
+
+        /* Result Box */
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #fff3e6;
+            border-left: 5px solid #ff8800;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            display: none;
+        }
+
+        /* Animation */
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeSlide 0.6s ease-in-out;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 13px;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="title">
+        BANARAS HINDU UNIVERSITY
+        <br>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+    <h3>Semester Grade Calculation</h3>
+
+    <input type="number" id="maj" placeholder="Major Theory Marks">
+    <input type="number" id="min" placeholder="Minor Theory Marks">
+    <input type="number" id="sec" placeholder="SEC Marks">
+    <input type="number" id="md" placeholder="MD Marks">
+    <input type="number" id="ayu" placeholder="Ayurveda Marks">
+    <input type="number" id="eng" placeholder="English Marks">
+    <input type="number" id="env" placeholder="Yoga / Environmental Marks">
+    <input type="number" id="min_p" placeholder="Minor Practical Marks">
+    <input type="number" id="maj_p" placeholder="Major Practical Marks">
+
+    <button onclick="calculate()">Generate Result</button>
+
+    <div class="result" id="result"></div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 | Created by Abhishek
+</div>
+
+<script>
+function calculate() {
+
+    let maj = parseInt(document.getElementById("maj").value) || 0;
+    let min = parseInt(document.getElementById("min").value) || 0;
+    let sec = parseInt(document.getElementById("sec").value) || 0;
+    let md = parseInt(document.getElementById("md").value) || 0;
+    let ayu = parseInt(document.getElementById("ayu").value) || 0;
+    let eng = parseInt(document.getElementById("eng").value) || 0;
+    let env = parseInt(document.getElementById("env").value) || 0;
+    let min_p = parseInt(document.getElementById("min_p").value) || 0;
+    let maj_p = parseInt(document.getElementById("maj_p").value) || 0;
+
+    let credit = (((Math.floor(maj/10)+1)*3) +
+                  ((Math.floor(min/10)+1)*3) +
+                  ((Math.floor(sec/10)+1)*3) +
+                  ((Math.floor(md/10)+1)*3) +
+                  ((Math.floor(ayu/10)+1)*2) +
+                  ((Math.floor(min_p/10)+1)*1) +
+                  ((Math.floor(maj_p/10)+1)*1) +
+                  ((Math.floor(eng/10)+1)*2) +
+                  ((Math.floor(env/10)+1)*2));
+
+    let sgpa = credit / 20;
+
+    let resultBox = document.getElementById("result");
+
+    resultBox.style.display = "block";
+    resultBox.innerHTML =
+        "Your SGPA is: " + sgpa.toFixed(2) +
+        "<br><span style='font-size:14px;color:#ff8800;'>Created by Abhishek</span>";
+
+    resultBox.classList.remove("animate");
+    void resultBox.offsetWidth;
+    resultBox.classList.add("animate");
+}
+</script>
+
+</body>
+</html>
