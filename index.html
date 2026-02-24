@@ -145,6 +145,14 @@ button:hover {
 </div>
 
 <script>
+
+function getGradePoint(marks){
+    if(marks < 40){
+        return 0;   // FAIL
+    }
+    return Math.floor(marks/10) + 1;
+}
+
 function calculate() {
 
     let fields = ["maj","maj_p","min","min_p","sec","md","ayu","eng","env"];
@@ -178,29 +186,29 @@ function calculate() {
 
     let majorCredit, minorCredit;
 
-    // Major Credit Logic
+    // Major Credit
     if (maj_p === 0) {
-        majorCredit = (Math.floor(maj/10)+1) * 4;
+        majorCredit = getGradePoint(maj) * 4;
     } else {
-        majorCredit = ((Math.floor(maj/10)+1) * 3) +
-                      ((Math.floor(maj_p/10)+1) * 1);
+        majorCredit = (getGradePoint(maj) * 3) +
+                      (getGradePoint(maj_p) * 1);
     }
 
-    // Minor Credit Logic
+    // Minor Credit
     if (min_p === 0) {
-        minorCredit = (Math.floor(min/10)+1) * 4;
+        minorCredit = getGradePoint(min) * 4;
     } else {
-        minorCredit = ((Math.floor(min/10)+1) * 3) +
-                      ((Math.floor(min_p/10)+1) * 1);
+        minorCredit = (getGradePoint(min) * 3) +
+                      (getGradePoint(min_p) * 1);
     }
 
     let credit = majorCredit +
                  minorCredit +
-                 ((Math.floor(sec/10)+1)*3) +
-                 ((Math.floor(md/10)+1)*3) +
-                 ((Math.floor(ayu/10)+1)*2) +
-                 ((Math.floor(eng/10)+1)*2) +
-                 ((Math.floor(env/10)+1)*2);
+                 (getGradePoint(sec)*3) +
+                 (getGradePoint(md)*3) +
+                 (getGradePoint(ayu)*2) +
+                 (getGradePoint(eng)*2) +
+                 (getGradePoint(env)*2);
 
     let sgpa = credit / 20;
 
@@ -210,6 +218,7 @@ function calculate() {
         "Your SGPA is: " + sgpa.toFixed(2) +
         "<br><span style='font-size:14px;color:#ff8800;'>Created by Abhishek</span>";
 }
+
 </script>
 
 </body>
