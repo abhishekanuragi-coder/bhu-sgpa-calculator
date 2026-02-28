@@ -146,11 +146,15 @@ button:hover {
 
 <script>
 
+// Updated Proper Grade System
 function getGradePoint(marks){
-    if(marks < 40){
-        return 0;   // FAIL
-    }
-    return Math.floor(marks/10) + 1;
+    if(marks >= 90) return 10;
+    if(marks >= 80) return 9;
+    if(marks >= 70) return 8;
+    if(marks >= 60) return 7;
+    if(marks >= 50) return 6;
+    if(marks >= 40) return 5;
+    return 0;
 }
 
 function calculate() {
@@ -186,7 +190,6 @@ function calculate() {
 
     let majorCredit, minorCredit;
 
-    // Major Credit
     if (maj_p === 0) {
         majorCredit = getGradePoint(maj) * 4;
     } else {
@@ -194,7 +197,6 @@ function calculate() {
                       (getGradePoint(maj_p) * 1);
     }
 
-    // Minor Credit
     if (min_p === 0) {
         minorCredit = getGradePoint(min) * 4;
     } else {
@@ -223,4 +225,3 @@ function calculate() {
 
 </body>
 </html>
-
